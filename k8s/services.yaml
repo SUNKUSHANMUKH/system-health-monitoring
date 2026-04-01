@@ -1,0 +1,166 @@
+# ─────────────────────────────────────────────
+# 🚀 API SERVICE
+# ─────────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: health-api
+  template:
+    metadata:
+      labels:
+        app: health-api
+    spec:
+      containers:
+      - name: health-api
+        image: health-api:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: health-api-svc
+  labels:
+    app: health-api   # 🔥 REQUIRED for ServiceMonitor
+spec:
+  selector:
+    app: health-api
+  ports:
+  - name: http        # 🔥 CRITICAL (ServiceMonitor uses this)
+    port: 80
+    targetPort: 8000
+  type: NodePort
+
+# ─────────────────────────────────────────────
+# 🚀 WORKER SERVICE
+# ─────────────────────────────────────────────
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: health-worker
+  template:
+    metadata:
+      labels:
+        app: health-worker
+    spec:
+      containers:
+      - name: health-worker
+        image: health-worker:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 15
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: health-worker-svc
+  labels:
+    app: health-worker   # 🔥 REQUIRED
+spec:
+  selector:
+    app: health-worker
+  ports:
+  - name: http           # 🔥 REQUIRED
+    port: 80
+    targetPort: 8000
+  type: NodePort
+
+# ─────────────────────────────────────────────
+# 🚀 DATABASE SERVICE
+# ─────────────────────────────────────────────
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: health-database
+  template:
+    metadata:
+      labels:
+        app: health-database
+    spec:
+      containers:
+      - name: health-database
+        image: health-database:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "300m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 15
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: health-database-svc
+  labels:
+    app: health-database   # 🔥 REQUIRED
+spec:
+  selector:
+    app: health-database
+  ports:
+  - name: http             # 🔥 REQUIRED
+    port: 80
+    targetPort: 8000
+  type: NodePort
