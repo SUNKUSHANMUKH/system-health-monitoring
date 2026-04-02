@@ -649,6 +649,7 @@ health-api-xxxxxxxxx-xxxxx         1/1     Running   0          30s
 health-worker-xxxxxxxxx-xxxxx      1/1     Running   0          30s
 health-database-xxxxxxxxx-xxxxx    1/1     Running   0          30s
 ```
+<img width="1792" height="1075" alt="Screenshot 2026-03-25 at 7 19 46 PM" src="https://github.com/user-attachments/assets/a6388826-f4bd-4553-ae51-ccac21017b95" />
 
 ---
 
@@ -732,6 +733,7 @@ histogram_quantile(0.99, rate(api_request_duration_seconds_bucket[5m]))
 ```
 
 > 💡 **p95 and p99 are the most important metrics in any production system.** Average response time hides problems — percentiles reveal them.
+<img width="1790" height="1001" alt="Screenshot 2026-04-01 at 12 41 32 PM" src="https://github.com/user-attachments/assets/a75db0d2-d2c0-4649-88a0-8b26dea646f5" />
 
 ---
 
@@ -853,6 +855,10 @@ db_connections_active
 1. Click **Save** (floppy disk icon top right)
 2. Name: `System Health Monitor`
 3. Click **Save**
+
+
+<img width="1790" height="1001" alt="Screenshot 2026-04-01 at 12 41 32 PM" src="https://github.com/user-attachments/assets/f4f192f2-6fcd-4d14-abae-26dced6a5744" />
+<img width="1792" height="1006" alt="Screenshot 2026-04-01 at 12 46 52 PM" src="https://github.com/user-attachments/assets/0e27e599-e29f-4477-84a7-e795193b8b86" />
 
 ---
 
