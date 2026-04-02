@@ -1238,7 +1238,12 @@ system-health-monitor/
 ```
 
 ---
+### The Output 
+<img width="1792" height="1075" alt="Screenshot 2026-03-25 at 7 19 46 PM" src="https://github.com/user-attachments/assets/c1fcfd70-db4f-47c2-953e-ac5eed8b68ef" />
+<img width="1792" height="1012" alt="Screenshot 2026-03-31 at 7 19 18 PM" src="https://github.com/user-attachments/assets/bbc26457-46f7-4657-95fb-b956ea0ca57b" />
+<img width="1790" height="1001" alt="Screenshot 2026-04-01 at 12 41 32 PM" src="https://github.com/user-attachments/assets/41abc094-168a-4dea-90eb-b5c87195d0a4" />
 
+---
 ## 🆚 What This Teaches vs Project 1
 
 | Skill | Project 1 | Project 2 (this one) |
